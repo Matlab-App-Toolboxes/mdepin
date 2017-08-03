@@ -10,7 +10,10 @@ classdef (HandleCompatible) Bean
         
     methods
         function obj = Bean(config)
-            for prop=config.getProperties();
+            for prop=config.getProperties()
+                if isa(obj, 'dynamicprops') && ~ isprop(obj, prop{1})
+                    addprop(obj, prop{1});
+                end
                 obj.(prop{1}) = config.get(prop{1});
             end
         end
