@@ -22,7 +22,7 @@ function pathArray = iAux(inStruct, currentPath, pathArray)
 fields = fieldnames(inStruct);
 pathArray = [pathArray; strcat(currentPath, '/', fields)];
 for field = fields(:)'
-    if isstruct(inStruct.(field{1}))
+    if numel(inStruct) == 1 && isstruct(inStruct.(field{1}))
         pathArray = iAux( ...
             inStruct.(field{1}), ...
             strcat(currentPath, '/', field{1}), pathArray);
